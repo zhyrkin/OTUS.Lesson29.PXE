@@ -8,4 +8,12 @@
 После настройки pxe-сервера с помощью плейбука pxe-клиент получит нужные файлы от сервера и выполнит установку системы.
 После нужно будет загрузиться с HDD и войти в систему пользователем otus:123
 
+![Скриншот 11-03-2025 211110](https://github.com/user-attachments/assets/57bdb837-9166-4573-8e76-6ca511c40a54)  
+![Скриншот 11-03-2025 211212](https://github.com/user-attachments/assets/8b0064bc-ba78-4e25-b15d-21ff491d354f)  
+![Скриншот 12-03-2025 093115](https://github.com/user-attachments/assets/e755352c-2dce-464a-9bb2-35a07389235d)  
+![Скриншот 12-03-2025 110137](https://github.com/user-attachments/assets/f2ed5cec-6939-4cec-996f-1b573cf84e43)  
+
+
+
+
 
