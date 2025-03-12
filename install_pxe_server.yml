@@ -1,0 +1,22 @@
+---
+- name: "Lesson29.PXE"
+  hosts: server 
+  gather_facts: True
+
+  vars:
+    relese_name: plucky
+  roles:
+    - install_dnsmasq
+    - configure_dnsmasq
+    - install_apache2
+    - configure_apache2
+    
+  post_tasks:
+    - name: restart dnsmasq
+      ansible.builtin.systemd:
+        name: dnsmasq
+        state: restarted
+    - name: restart apache2
+      ansible.builtin.systemd:
+        name: apache2
+        state: restarted

@@ -1,0 +1,11 @@
+---
+- name: apt update
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: install apache2
+  ansible.builtin.apt:
+    name: apache2
+    state: latest
+  notify: restart apache2

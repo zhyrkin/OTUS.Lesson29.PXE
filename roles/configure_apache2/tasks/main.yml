@@ -1,0 +1,48 @@
+---
+- name: Create directory for  images
+  ansible.builtin.file:
+    path: /srv/images
+    state: directory
+    mode: "0755"
+
+- name: Download iso Ubuntu 24.04
+  ansible.builtin.get_url:
+    url: 'http://cdimage.ubuntu.com/ubuntu-server/daily-live/current/{{relese_name}}-live-server-amd64.iso'
+    dest: '/srv/images/{{relese_name}}-live-server-amd64.iso'
+
+- name: Crate config file for ks-server
+  ansible.builtin.template:
+    src: ks-server.conf
+    dest: /etc/apache2/sites-available/ks-server.conf
+    mode: "0644"
+
+- name: Activate config ks-server in apache2
+  shell: a2ensite ks-server.conf
+
+- name: config path for iso files
+  ansible.builtin.template:
+    src: pxelinux_default
+    dest: /srv/tftp/amd64/pxelinux.cfg/default
+
+- name: restart apache2
+  ansible.builtin.systemd:
+    name: apache2
+    state: restarted
+
+- name: create folder for files
+  ansible.builtin.file:
+    path: /srv/ks
+    state: directory
+    mode: "0755"
+
+- name: create user-data
+  ansible.builtin.template:
+    src: user-data
+    dest: /srv/ks/user-data
+    mode: "0755"
+
+- name: create file for metadata
+  ansible.builtin.file:
+    path: /srv/ks/meta-data
+    state: touch
+    mode: "0755"

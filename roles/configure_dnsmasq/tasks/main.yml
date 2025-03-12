@@ -1,0 +1,24 @@
+---
+- name: Create config file
+  ansible.builtin.template:
+    src: pxe.conf
+    dest: /etc/dnsmasq.d/pxe.conf
+    mode: u=rw,g=r,o=r
+  
+- name: create folder for tftp
+  ansible.builtin.file:
+    path: /srv/tftp
+    state: directory
+    mode: "0755"
+
+- name: Get and unarchive netework files Ubuntu 24.04
+  ansible.builtin.unarchive:
+    src: "http://cdimage.ubuntu.com/ubuntu-server/daily-live/current/{{ relese_name }}-netboot-amd64.tar.gz"
+    dest: /srv/tftp
+    remote_src: yes
+  
+- name: restart dnsmasq
+  ansible.builtin.systemd:
+    name: dnsmasq
+    state: restarted
+    

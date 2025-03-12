@@ -1,0 +1,37 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: en_US.UTF-8
+  preserve_sources_list: false
+  apt:
+    disable_components: []
+    geoip: true
+    preserve_sources_list: false
+    primary:
+    - arches: [amd64,i386]
+      uri: http://us.archive.ubuntu.com/ubuntu
+    - arches: [default]
+      uri: http://us.archive.ubuntu.com/ubuntu/
+  identity:
+    hostname: linux
+    username: otus
+    password: $6$rounds=656000$MZLXHvh$TvpBVWhschUOmmPqPBugJuN5iNq0WXH4WRcnfnA/OjOcaMp/RDwHDaz4ShQb3oCHbNOrivxi1HV7Q6KqLO3KF/
+    realname: otus
+  kernel:
+    package: linux-generic
+  keyboard:
+    layout: us
+    toggle: null
+    variant: ''
+  network:
+    version: 2
+    ethernets:
+      enp0s3:
+        dhcp4: true
+      enp0s8:
+        dhcp4: true
+  ssh:
+    allow-pw: true
+    install-server: true
+    updates: security
+    version: 1
